@@ -1,0 +1,3 @@
+.vagrant
+hadoop/mount/*
+chef-cluster/mount/*

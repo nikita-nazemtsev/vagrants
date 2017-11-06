@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "hadoop1" do |hadoop1|
+    hadoop1.vm.box = "debian/contrib-jessie64"
+    hadoop1.vm.hostname = 'master'
+    hadoop1.vm.synced_folder '.\mount', '/hadoop_src'
+    hadoop1.vm.provision "shell", path: "presetup.sh"
+    hadoop1.vm.network "private_network", ip: "192.168.50.100",
+      virtualbox__intnet: true
+
+    hadoop1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 1000]
+      v.customize ["modifyvm", :id, "--name", "hadoop1"]
+    end
+  end
+end
